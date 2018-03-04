@@ -104,7 +104,7 @@
   (loop [remaining-asym-parts asym-body-parts 
        final-body-parts []]
     (if (empty? remaining-asym-parts) 
-    final-body-parts
+      final-body-parts
       (let [[part & remaining] remaining-asym-parts] 
         (recur remaining 
              (into final-body-parts (matching-multi-part part n))
