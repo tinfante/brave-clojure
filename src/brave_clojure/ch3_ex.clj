@@ -91,10 +91,11 @@
 (defn matching-multi-part [part n]
   (defn gen-names [part]
     (if (re-matches #"^left-.*" (:name part))
-      (map (fn [x] {:name (clojure.string/replace (:name part) #"^left-" (str x "-")) :size (:size part)} ) 
+      (map (fn [x] {:name (clojure.string/replace (:name part) #"^left-" (str x "-")) :size (:size part)})
            (range 1 (+ 1 n) 1))
       [part]
-      ))
+      )
+    )
   (gen-names part)
   )
 
@@ -106,10 +107,11 @@
     final-body-parts
       (let [[part & remaining] remaining-asym-parts] 
         (recur remaining 
-             (into final-body-parts
-               (set (matching-multi-part part n)))
+             (into final-body-parts (matching-multi-part part n))
           )
-        )))
+        )
+      )
+    )
   )
 
 (defn ex5 
