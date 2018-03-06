@@ -1,4 +1,5 @@
-(ns brave-clojure.ch3-ex)
+(ns brave-clojure.ch3-ex
+  "https://www.braveclojure.com/do-things/")
 
 
 ; 1. Use the str, vector, list, hash-map, and hash-set functions.
