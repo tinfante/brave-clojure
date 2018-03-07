@@ -2,7 +2,8 @@
   (:gen-class)
   ;(use brave-clojure.ch3-ex)
   ;(use brave-clojure.ch4-fwpd)
-  (use brave-clojure.ch4-ex)
+  ;(use brave-clojure.ch4-ex)
+  (use brave-clojure.ch5-ex)
   )
 
 (defn -main
@@ -22,7 +23,10 @@
   ;; Chapter 4 Exercises
   ;(ex1)
   ;(ex2)
-  (ex3)
+  ;(ex3)
   ;(ex4)
+
+  ;; Chapter 5 Exercises
+  (ex1)
 
   )
