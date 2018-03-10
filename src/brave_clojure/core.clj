@@ -3,6 +3,7 @@
   ;(use brave-clojure.ch3-ex)
   ;(use brave-clojure.ch4-fwpd)
   ;(use brave-clojure.ch4-ex)
+  ;(use brave-clojure.ch5-peg-thing)
   (use brave-clojure.ch5-ex)
   )
 
@@ -26,7 +27,14 @@
   ;(ex3)
   ;(ex4)
 
+  ;; Chapter 5, Peg Thing.
+  ;(-peg-main)
+
   ;; Chapter 5 Exercises
-  (ex1)
+  ;(ex1)
+  ;(ex2)
+  ;(ex3)
+  (ex4)
+  (ex5)
 
   )
