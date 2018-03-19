@@ -4,7 +4,8 @@
   ;(use brave-clojure.ch4-fwpd)
   ;(use brave-clojure.ch4-ex)
   ;(use brave-clojure.ch5-peg-thing)
-  (use brave-clojure.ch5-ex)
+  ;(use brave-clojure.ch5-ex)
+  (use brave-clojure.ch7-ex)
   )
 
 (defn -main
@@ -34,7 +35,10 @@
   ;(ex1)
   ;(ex2)
   ;(ex3)
-  (ex4)
-  (ex5)
+  ;(ex4)
+  ;(ex5)
+
+  ;; Chapter 7 Exercises
+  ;; TODO
 
   )
