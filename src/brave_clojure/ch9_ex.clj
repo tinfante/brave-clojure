@@ -8,8 +8,10 @@
 (defn do-search
   [query]
   (let [result (promise)]
-    (future (deliver result (slurp (str "http://www.google.com/search?q%3D" query))))
-    (future (deliver result (slurp (str "http://www.bing.com/search?q%3D" query))))
+    ;(future (deliver result (slurp (str "http://www.google.com/search?q=" query))))
+    ;; Line above: google returns 403. Don't use for now.
+    (future (deliver result (slurp (str "http://www.bing.com/search?q=" query))))
+    (future (deliver result (slurp (str "http://search.yahoo.com/search?q=" query))))
     @result
     )
   )
@@ -25,8 +27,10 @@
 ;; the search engines to use.
 (def search-engines
   [
-   "http://www.google.com/search?q%3D"
-   "http://www.bing.com/search?q%3D"
+   ;"http://www.google.com/search?q="
+   ;; Line above: google returns 403. Don't use for now.
+   "http://www.bing.com/search?q="
+   "http://search.yahoo.com/search?q="
    ]
   )
 
@@ -50,3 +54,4 @@
 ;; 3. Create a new function that takes a search term and search engines
 ;; as arguments, and returns a vector of the URLs from the first page
 ;; of search results from each search engine.
+;; TODO.
