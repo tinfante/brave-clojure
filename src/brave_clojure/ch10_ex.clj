@@ -5,13 +5,18 @@
 
 ;; 1. Create an atom with the initial value 0, use swap! to increment it a
 ;; couple of times, and then dereference it.
-(def my-atom (atom 0))
-(swap! my-atom (fn [current-state] (inc current-state)))
-(swap! my-atom (fn [current-state] (inc current-state)))
+(defn create-swap-atom 
+  []
+  (def my-atom (atom 0))
+  (swap! my-atom (fn [current-state] (inc current-state)))
+  (swap! my-atom (fn [current-state] (inc current-state)))
+  @my-atom
+  )
 
 (defn ex1
   []
-  @my-atom)
+  (println (create-swap-atom))
+  )
 
 
 ;; 2. Create a function that uses futures to parallelize the task of
@@ -25,7 +30,34 @@
 ;;
 ;;        (quote-word-count 5)
 ;;        ; => {"ochre" 8, "smoothie" 2}
-;; TODO
+(defn get-quote
+  []
+  (slurp "https://www.braveclojure.com/random-quote")
+  )
+
+(defn clean-norm-quote
+  [the-quote]
+  (clojure.string/lower-case 
+    (clojure.string/trim 
+      (first (clojure.string/split the-quote #"--"))))
+  )
+
+(defn get-words
+  [normalized-quote]
+  (re-seq #"\w+" normalized-quote)
+  )
+
+(defn word-freq
+  [word-list word-freq-map]
+  ; como actualizaba maps?  
+  )
+
+(defn parallel
+  [num-quotes]
+  (let [word-count (atom {})]  ; no hago nada con el atom por ahora.
+    (pmap (fn [_] (get-quote)) (range num-quotes))
+    )
+  )
 
 
 ;; 3. Create representations of two characters in a game. The first character
