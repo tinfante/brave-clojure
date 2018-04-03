@@ -5,7 +5,7 @@
 
 ;; 1. Create an atom with the initial value 0, use swap! to increment it a
 ;; couple of times, and then dereference it.
-(defn create-swap-atom 
+(defn create-swap-atom
   []
   (def my-atom (atom 0))
   (swap! my-atom (fn [current-state] (inc current-state)))
@@ -33,12 +33,13 @@
 (defn get-quote
   []
   (slurp "https://www.braveclojure.com/random-quote")
-  )
+  ) ; Cert error for https at the office, works at home.
+    ; Exercise used to use http instead of http.
 
 (defn clean-norm-quote
   [the-quote]
-  (clojure.string/lower-case 
-    (clojure.string/trim 
+  (clojure.string/lower-case
+    (clojure.string/trim
       (first (clojure.string/split the-quote #"--"))))
   )
 
@@ -47,10 +48,11 @@
   (re-seq #"\w+" normalized-quote)
   )
 
-(defn word-freq
-  [word-list word-freq-map]
-  ; como actualizaba maps?  
-  )
+(defn create-futures
+  [num-quotes]
+  (repeatedly num-quotes (fn [] (future (get-quote))))
+  ) ;; Deberia updatear el atom con el conteo de frecuencias.
+    ;; Antes de eso, limpiar y tokenizar.
 
 (defn parallel
   [num-quotes]
