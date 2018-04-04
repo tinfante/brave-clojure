@@ -49,6 +49,8 @@
   (re-seq #"\w+" normalized-quote)
   )
 
+(def word-count (atom {}))
+
 (defn create-futures
   [num-quotes]
   (repeatedly num-quotes
