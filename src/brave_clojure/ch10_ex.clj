@@ -33,8 +33,8 @@
 (defn get-quote
   []
   (slurp "https://www.braveclojure.com/random-quote")
-  ) ; Cert error for https at the office, works at home.
-    ; Exercise used to use http instead of http.
+  ) ; Exercise used to use http instead of https... cert error for https
+    ; on osx, works at home on linux.
 
 (defn clean-norm-quote
   [the-quote]
@@ -45,12 +45,14 @@
 
 (defn get-words
   [normalized-quote]
+  (println normalized-quote)  ; Remove afterwards, just to see if it works.
   (re-seq #"\w+" normalized-quote)
   )
 
 (defn create-futures
   [num-quotes]
-  (repeatedly num-quotes (fn [] (future (get-quote))))
+  (repeatedly num-quotes
+              (fn [] (future (get-words (clean-norm-quote (get-quote))))))
   ) ;; Deberia updatear el atom con el conteo de frecuencias.
     ;; Antes de eso, limpiar y tokenizar.
 
