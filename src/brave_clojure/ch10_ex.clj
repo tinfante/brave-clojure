@@ -43,26 +43,38 @@
       (first (clojure.string/split the-quote #"--"))))
   )
 
-(defn get-words
-  [normalized-quote]
-  (println normalized-quote)  ; Remove afterwards, just to see if it works.
-  (re-seq #"\w+" normalized-quote)
+(defn get-words [normalized-quote]
+  (re-seq #"\w+" normalized-quote))
+
+(defn update-word-count
+  [word-count quote-word-list]
+  (doseq [word quote-word-list]
+    (swap! word-count (fn [state] (merge-with + state {word 1})))
+    )
   )
 
-(def word-count (atom {}))
-
 (defn create-futures
-  [num-quotes]
+  [num-quotes word-count]
   (repeatedly num-quotes
-              (fn [] (future (get-words (clean-norm-quote (get-quote))))))
-  ) ;; Deberia updatear el atom con el conteo de frecuencias.
-    ;; Antes de eso, limpiar y tokenizar.
-
-(defn parallel
-  [num-quotes]
-  (let [word-count (atom {})]  ; no hago nada con el atom por ahora.
-    (pmap (fn [_] (get-quote)) (range num-quotes))
+              (fn [] (future (update-word-count word-count
+                              (get-words (clean-norm-quote (get-quote))))))
     )
+  )
+
+(defn deref-futures
+  [quote-futures]
+  (dorun (map deref quote-futures))
+  )
+
+(defn parallel-quote-word-count
+  [num-quotes]
+  (let [word-count (atom {})]
+    (deref-futures (create-futures num-quotes word-count))
+    @word-count)
+  )
+
+(defn ex2 [] (println (parallel-quote-word-count 5))
+             (shutdown-agents)  ;; Otherwise "$lein run" doesn't end.
   )
 
 

@@ -53,7 +53,8 @@
   ;; TODO ex3
 
   ;; Chapter 10 Exercises
-  (ex1)
-  ;; TODO ex2, ex3
+  ;(ex1)
+  (ex2)
+  ;; TODO ex3
 
   )
