@@ -82,4 +82,59 @@
 ;; has 15 hit points out of a total of 40. The second character has a healing
 ;; potion in his inventory. Use refs and transactions to model the consumption
 ;; of the healing potion and the first character healing.
-;; TODO
+(defn create-char
+  ([name- max-hp hp]
+   {
+    :name name-
+    :max-hp max-hp
+    :hp hp
+    :inventory {:gold 0 :health-potion 0}
+    }
+   )
+  ([name- max-hp hp gold health-potion]
+   {
+    :name name-
+    :max-hp max-hp
+    :hp hp
+    :inventory {:gold gold :health-potion health-potion}
+    }
+   )
+  )
+
+(def Minsc (ref (create-char "Minsc" 40 15)))
+(def Boo (ref (create-char "Boo" 5 5 200 3)))
+
+; Does not check if giving character has enough of the item to make the
+; transaction.
+(defn transfer-item
+  ([giving-char item receiving-char]
+   (dosync
+     (alter giving-char update-in [:inventory item] dec)
+     (alter receiving-char update-in [:inventory item] inc)
+     )
+   )
+  ([giving-char item receiving-char n]
+   (dosync
+     (alter giving-char update-in [:inventory item] #(- % n))
+     (alter receiving-char update-in [:inventory item] #(+ % n))
+     )
+   )
+  )
+
+; Does not check if character has enough health potions or if max hp will
+; be exceeded.
+(defn consume-health-potion
+  [character]
+  (dosync
+    (alter character update-in [:inventory :health-potion] dec)
+    (alter character update-in [:hp] #(+ % 15))
+    )
+  )
+
+(defn ex3
+  []
+  (println "Before:\n" @Boo "\n" @Minsc)
+  (transfer-item Boo :health-potion Minsc 2)
+  (consume-health-potion Minsc)
+  (println "After:\n" @Boo "\n" @Minsc)
+  )

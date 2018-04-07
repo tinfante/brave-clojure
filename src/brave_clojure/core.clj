@@ -54,7 +54,7 @@
 
   ;; Chapter 10 Exercises
   ;(ex1)
-  (ex2)
-  ;; TODO ex3
+  ;(ex2)
+  (ex3)
 
   )
