@@ -8,7 +8,8 @@
   ;(use brave-clojure.ch7-ex)
   ;(use brave-clojure.ch8-ex)
   ;(use brave-clojure.ch9-ex)
-  (use brave-clojure.ch10-ex)
+  ;(use brave-clojure.ch10-ex)
+  (use brave-clojure.ch13-ex)
   )
 
 (defn -main
@@ -55,6 +56,10 @@
   ;; Chapter 10 Exercises
   ;(ex1)
   ;(ex2)
-  (ex3)
+  ;(ex3)
+
+  ;; Chapter 13 Exercises
+  ;(ex1)
+  (ex2)
 
   )
