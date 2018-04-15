@@ -56,6 +56,16 @@
   (odds [x] nil)
   )
 
+(defn ex3
+  []
+  (println (evens [1 2 3 4]))
+  (println (odds [1 2 3 4]))
+  (println (evens '(1 2 3 4)))
+  (println (odds '(1 2 3 4)))
+  (println (evens "asd"))
+  (println (odds 3/4))
+  )
+
 
 ;; 4. Create a role-playing game that implements behavior using multiple
 ;; dispatch.
