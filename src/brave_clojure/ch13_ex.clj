@@ -27,8 +27,7 @@
   [name- title]
   WereCreature
   (full-moon-behavior-2 [x]
-    (str name- " will encourage people and sweat to the oldies"))
-  )
+    (str name- " will encourage people and sweat to the oldies")))
 
 (defn ex2
   []
@@ -39,6 +38,23 @@
 
 ;; 3. Create your own protocol, and then extend it using extend-type and
 ;; extend-protocol.
+(defprotocol EvensOdds
+  (evens [x])
+  (odds [x]))
+
+(extend-type clojure.lang.PersistentVector
+  EvensOdds
+  (evens [x] (vec (filter #(even? %) x)))
+  (odds [x] (vec (filter #(odd? %) x))))
+
+(extend-protocol EvensOdds
+  clojure.lang.PersistentList
+  (evens [x] (filter #(even? %) x))
+  (odds [x] (filter #(odd? %) x))
+  java.lang.Object  ;; for default behavior
+  (evens [x] nil)
+  (odds [x] nil)
+  )
 
 
 ;; 4. Create a role-playing game that implements behavior using multiple
