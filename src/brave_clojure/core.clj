@@ -43,8 +43,8 @@
   ;(ex5)
 
   ;; Chapter 7 Exercises
-  (ex1)
-  ;; TODO ex2
+  ;(ex1)
+  (ex2 '(1 + 3 * 4 - 5))
 
   ;; Chapter 8 Exercises
   ;; TODO
