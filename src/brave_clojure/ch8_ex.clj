@@ -12,7 +12,61 @@
 ;;
 ;; When the data is valid, the println and render forms should be evaluated,
 ;; and when-valid should return nil if the data is invalid
+(def valid-order-details
+  {:name "Mitchard Blimmons"
+   :email "mitchard@blimmonsgmail.com"})
 
+(def invalid-order-details
+  {:name "Mitchard Blimmons"
+   :email "mitchard.blimmonsgmail.com"})
+
+(def order-details-validations
+  {:name
+   ["Please enter a name" not-empty]
+   :email
+   ["Please enter an email address"
+    not-empty
+    "Your email address doesn't look like an email address"
+    #(or (empty? %) (re-seq #"@" %))]})
+
+(defn error-messages-for
+  "Return a seq of error messages"
+  [to-validate message-validator-pairs]
+  (map first (filter #(not ((second %) to-validate))
+                     (partition 2 message-validator-pairs))))
+
+(defn validate
+  "Returns a map with a vector of errors for each key"
+  [to-validate validations]
+  (reduce (fn [errors validation]
+            (let [[fieldname validation-check-groups] validation
+                  value (get to-validate fieldname)
+                  error-messages (error-messages-for value validation-check-groups)]
+              (if (empty? error-messages)
+                errors
+                (assoc errors fieldname error-messages))))
+          {}
+          validations))
+
+(defmacro when-valid
+  [to-validate validations & expressions]
+  `(when
+    (empty? (validate ~to-validate ~validations))
+    ~@expressions
+    ))
+
+(defn ex1
+  []
+  (println "Invalid order.")
+  (println (when-valid invalid-order-details order-details-validations
+                       (println "It's a success.")
+                       true
+                       ))
+  (println "\nValid order.")
+  (println (when-valid valid-order-details order-details-validations
+                       (println "It's a success.")
+                       true
+                       )))
 
 ;; 2. You saw that and is implemented as a macro. Implement or as a macro.
 

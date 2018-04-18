@@ -5,8 +5,8 @@
   ;(use brave-clojure.ch4-ex)
   ;(use brave-clojure.ch5-peg-thing)
   ;(use brave-clojure.ch5-ex)
-  (use brave-clojure.ch7-ex)
-  ;(use brave-clojure.ch8-ex)
+  ;(use brave-clojure.ch7-ex)
+  (use brave-clojure.ch8-ex)
   ;(use brave-clojure.ch9-ex)
   ;(use brave-clojure.ch10-ex)
   ;(use brave-clojure.ch13-ex)
@@ -47,7 +47,7 @@
   ;(ex2 '(1 + 3 * 4 - 5))
 
   ;; Chapter 8 Exercises
-  ;; TODO
+  (ex1)
 
   ;; Chapter 9 Exercises
   ;(ex1)
