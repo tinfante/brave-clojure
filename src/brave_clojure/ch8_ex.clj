@@ -69,6 +69,20 @@
                        )))
 
 ;; 2. You saw that and is implemented as a macro. Implement or as a macro.
+(defmacro or-
+  ([] true)
+  ([x] x)
+  ([x & next-]
+   `(let [and# ~x]
+      (if and# and# (or- ~@next-))
+      )))
+
+(defn ex2
+  []
+  (println "(or false 1 2)")
+  (println (or false 1 2) "\n")
+  (println "(or- false 1 2)")
+  (println (or- false 1 2)))
 
 
 ;; 3. In Chapter 5 you created a series of functions (c-int, c-str, c-dex)
